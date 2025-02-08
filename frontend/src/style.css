@@ -1,0 +1,295 @@
+html {
+  background-color: white;
+  text-align: center;
+  color: black;
+  min-width: 950px;
+}
+
+body {
+  margin: 0; /* Remove default body margins */
+  height: 100vh; /* Make body take up full viewport height */
+  display: flex;
+  flex-direction: column; /* Arrange header and content vertically */
+  position: relative;
+}
+
+h1 {
+  text-align: center; /* Center the heading */
+  padding: 12px;
+  background-color: lightblue;
+}
+
+.separator {
+  border-bottom: 5px solid lightgray;
+  width: 100%;
+}
+
+.buttonDiv {
+  width: 100%;
+  position: relative;
+  padding-right: 10px;
+  overflow: hidden;
+  margin-bottom: 10px; /* Add some space below the button */
+}
+
+#content-area {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+#left-column {
+  width: 25%;
+  overflow-y: auto; /* Make the left column scrollable if content overflows */
+  padding: 10px;
+  background-color: lightgray;
+  position: relative;
+}
+
+#dvadeseticetirisataHrButton {
+  width: 100%;
+  background-color: #d12227;
+  height: 50px;
+  align-items: start;
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+}
+
+#dvadeseticetirisataHrButton:hover {
+  background-color: #ff2227;
+  opacity: 0.8;
+}
+
+#dvadeseticetirisataHrButton img {
+  max-width: 100%;
+  height: auto;
+}
+
+#dvadeseticetirisataHrButton text {
+  color: white;
+  flex-grow: 1;
+  text-align: center;
+  font-size: xx-large;
+}
+
+#dvadeseticetirisataHrSubmenu {
+  width: 100%;
+  display: none; /* Initially hidden */
+  position: relative;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  z-index: 1; /* Ensure it's on top of other elements */
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: #ff1d24;
+}
+
+#dvadeseticetirisataHrSubmenu button {
+  display: block; /* Stack buttons vertically */
+  width: 100%;
+  font-weight: bold;
+  color: white;
+  border: none;
+  background-color: #ff1d24;
+  text-align: left;
+  cursor: pointer;
+}
+
+#dvadeseticetirisataHrSubmenu button:hover {
+  background-color: darkred;
+}
+
+#indexHrButton {
+  width: 100%;
+  background-color: #eb1d24;
+  height: 50px;
+  cursor: pointer;
+  position: relative;
+}
+
+#indexHrButton:hover {
+  background-color: #ff1d24;
+  opacity: 0.8;
+}
+
+#indexHrButton img {
+  max-width: 100%;
+  height: auto;
+}
+
+#indexHrSubmenu {
+  width: 100%;
+  display: none; /* Initially hidden */
+  position: relative;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  z-index: 1; /* Ensure it's on top of other elements */
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: #ff1d24;
+}
+
+#indexHrSubmenu button {
+  display: block; /* Stack buttons vertically */
+  width: 100%;
+  font-weight: bold;
+  color: white;
+  border: none;
+  background-color: #ff1d24;
+  text-align: left;
+  cursor: pointer;
+}
+
+#indexHrSubmenu button:hover {
+  background-color: darkred;
+}
+
+#slobodnadalmacijaHrButton {
+  width: 100%;
+  background-color: #ffffff;
+  height: 50px;
+  align-items: center;
+  cursor: pointer;
+}
+
+#slobodnadalmacijaHrButton:hover {
+  opacity: 0.8;
+}
+
+#slobodnadalmacijaHrButton img {
+  margin-top: 5px;
+  max-height: 95%;
+  max-width: auto;
+  height: auto;
+}
+
+#slobodnadalmacijaHrSubmenu {
+  width: 100%;
+  display: none; /* Initially hidden */
+  position: relative;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  z-index: 1; /* Ensure it's on top of other elements */
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+#slobodnadalmacijaHrSubmenu button {
+  display: block; /* Stack buttons vertically */
+  width: 100%;
+  font-weight: bold;
+  color: black;
+  border: none;
+  background-color: #ffffff;
+  text-align: left;
+  cursor: pointer;
+}
+
+#slobodnadalmacijaHrSubmenu button:hover {
+  background-color: lightgrey;
+}
+
+#telegramHrButton {
+  width: 100%;
+  background-color: #ad3737;
+  height: 50px;
+  align-items: center;
+  cursor: pointer;
+}
+
+#telegramHrButton:hover {
+  background-color: #ff3737;
+  opacity: 0.8;
+}
+
+#telegramHrButton img {
+  margin-top: 5px;
+  max-height: 95%;
+  max-width: auto;
+  height: auto;
+}
+
+#right-column {
+  width: 75%;
+  overflow-y: auto; /* Make the right column scrollable */
+  padding: 10px;
+}
+
+#articleList {
+  margin-right: 5%;
+  list-style-type: none; /* Remove bullet points from list */
+  padding: 0; /* Remove default list padding */
+}
+
+#modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: left;
+}
+
+#modal-content {
+  background-color: #fefefe;
+  position: fixed;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 90%;
+  max-height: 80vh;
+  left: 10%;
+  top: 10%;
+  overflow-y: auto;
+  border-radius: 20px;
+  z-index: 2;
+}
+
+#modal-body {
+  position: absolute;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+#modal-body img {
+  max-width: 100%; /* Make images scale to fit the modal */
+  height: auto; /* Maintain aspect ratio */
+}
+
+#modal-header {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 3;
+}
+
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px; /* Adjust top padding as needed */
+  right: 10px; /* Adjust right padding as needed */
+  background-color: white; /* Or transparent, as you prefer */
+  border-radius: 50%; /* Make it round */
+  width: 37px;
+  height: 37px;
+  text-align: center;
+  z-index: 4;
+  display: flex; /* Use flexbox for centering */
+  align-items: center; /* Vertically center */
+  justify-content: center; /* Horizontally center */
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
