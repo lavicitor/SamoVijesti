@@ -1,5 +1,5 @@
 # Samo vijesti
-
+![screenshot](image.png)
 I made this app to learn go and js. It downloads RSS feeds of a few news sites and displays them in a concise way without boilerplate.
 
 # Developing

@@ -158,14 +158,14 @@ func (a *App) GetArticleContent(url string) (string, error) {
 	} else if strings.Contains(url, "index.hr") {
 		selector = ".left-part"
 	} else if strings.Contains(url, "slobodnadalmacija.hr") {
-		selector = ".itemFullText.itemFullText--freecontent"
+		selector = ".row.row--grid.row--content"
 	} else if strings.Contains(url, "telegram.hr") {
 		selector = "#article-body"
 	}
 
 	excluded24sataHr := []string{"article_navigation", "dfp_banner dfp_banner--billboard_mid", "share_bar", "app_promo_block_container", "article_keywords_container", "article__content_container engagement_bar_wrapper", "article__thread"}
 	excludedIndexHr := []string{"js-slot-container", "tags-holder", "article-report-container", "article-call-to-action", "main-img-desc", "loading-text", "front-gallery-holder flex", "gallery-thumb-slider gallery-slider swiper", "gallery-desc-slider gallery-slider swiper"}
-	excludedSlobodnaDalmacijaHr := []string{"se-embed se-embed--photo"}
+	excludedSlobodnaDalmacijaHr := []string{"se-embed se-embed--photo", "item__image", "item__tags", "item__related", "item__image-info"}
 	excludedTelegramHr := []string{"full flex overtitle-parent relative", "nothfive full flex relative article-meta", "full relative single-article-footer flex column-top-pad", "full flex cxenseignore article-full-width", "full flex cxenseignore", "perex", "fb-post"}
 
 	excludedClasses := slices.Concat(excluded24sataHr, excludedIndexHr, excludedSlobodnaDalmacijaHr, excludedTelegramHr)
