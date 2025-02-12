@@ -36,13 +36,14 @@ h1 {
   display: flex;
   flex-grow: 1;
   overflow: hidden;
+  background-color: lightgrey;
 }
 
 #left-column {
   width: 25%;
   overflow-y: auto; /* Make the left column scrollable if content overflows */
   padding: 10px;
-  background-color: lightgray;
+  background-color: #1c1c1c;
   position: relative;
 }
 
@@ -54,6 +55,7 @@ h1 {
   justify-content: center;
   display: flex;
   cursor: pointer;
+  border: 0;
 }
 
 #dvadeseticetirisataHrButton:hover {
@@ -83,6 +85,7 @@ h1 {
   padding: 5px;
   box-sizing: border-box;
   background-color: #ff1d24;
+  border: 0;
 }
 
 #dvadeseticetirisataHrSubmenu button {
@@ -106,6 +109,7 @@ h1 {
   height: 50px;
   cursor: pointer;
   position: relative;
+  border: 0;
 }
 
 #indexHrButton:hover {
@@ -128,6 +132,7 @@ h1 {
   padding: 5px;
   box-sizing: border-box;
   background-color: #ff1d24;
+  border: 0;
 }
 
 #indexHrSubmenu button {
@@ -145,12 +150,46 @@ h1 {
   background-color: darkred;
 }
 
+#sisakInfoButton {
+  width: 100%;
+  background-color: #00165d;
+  height: 50px;
+  align-items: start;
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+  font-family:serif;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border: 0;
+}
+
+#sisakInfoButton:hover {
+  background-color: #00168d;
+  opacity: 0.8;
+}
+
+#sisakInfoButton img {
+  max-width: 100%;
+  height: auto;
+}
+
+#sisakInfoButton text {
+  color: white;
+  flex-grow: 1;
+  text-align: center;
+  font-size: xx-large;
+}
+
 #slobodnadalmacijaHrButton {
   width: 100%;
   background-color: #ffffff;
   height: 50px;
   align-items: center;
   cursor: pointer;
+  border: 0;
 }
 
 #slobodnadalmacijaHrButton:hover {
@@ -174,6 +213,7 @@ h1 {
   padding: 5px;
   box-sizing: border-box;
   background-color: #ffffff;
+  border: 0;
 }
 
 #slobodnadalmacijaHrSubmenu button {
@@ -197,6 +237,7 @@ h1 {
   height: 50px;
   align-items: center;
   cursor: pointer;
+  border: 0;
 }
 
 #telegramHrButton:hover {
@@ -244,6 +285,7 @@ h1 {
   width: 80%;
   height: 90%;
   max-height: 80vh;
+  max-width: 100%;
   left: 10%;
   top: 10%;
   overflow-y: auto;

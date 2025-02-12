@@ -7,7 +7,7 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"slices"
+	"regexp"
 	"strings"
 	"time"
 
@@ -108,6 +108,13 @@ func (a *App) GetArticleImage(url string) (string, error) {
 		if src, exists := imgSel.Attr("src"); exists {
 			ImageURL = src
 		}
+	} else if strings.Contains(url, "sisak.info") {
+		imgSel := doc.Find(".tdb-featured-image-bg").First().Parent() // Original selector
+		re := regexp.MustCompile(`url\('([^']+)'\)`)
+		match := re.FindStringSubmatch(imgSel.Text())
+		if len(match) > 1 {
+			ImageURL = match[1]
+		}
 	} else if strings.Contains(url, "slobodnadalmacija.hr") {
 		imgSel := doc.Find(".card__image").First()
 		if src, exists := imgSel.Attr("src"); exists {
@@ -151,24 +158,26 @@ func (a *App) GetArticleContent(url string) (string, error) {
 	}
 
 	var content strings.Builder
-	selector := ""
+	var selector string
+	var excludedClasses []string
 
 	if strings.Contains(url, "24sata.hr") {
 		selector = "article"
+		excludedClasses = []string{"article_navigation", "article__info_wrap", "engagement_bar_container", "dfp_banner dfp_banner--billboard_mid", "share_bar", "app_promo_block_container", "article_keywords_container", "article__content_container engagement_bar_wrapper", "article__thread"}
 	} else if strings.Contains(url, "index.hr") {
 		selector = ".left-part"
+		excludedClasses = []string{"js-slot-container", "tags-holder", "article-report-container", "article-call-to-action", "main-img-desc", "loading-text", "front-gallery-holder flex", "gallery-thumb-slider gallery-slider swiper", "gallery-desc-slider gallery-slider swiper"}
+	} else if strings.Contains(url, "sisak.info") {
+		selector = ".tdc_zone"
+		excludedClasses = []string{"vc_column tdi_145  wpb_column vc_column_container tdc-column td-pb-span12", "td_block_wrap tdb_single_date tdi_130 td-pb-border-top td_block_template_1 tdb-post-meta", "vc_row tdi_137  wpb_row td-pb-row", "td_block_inner td-mc1-wrap", "tdc_zone tdi_148  wpb_row td-pb-row", "vc_column tdi_132  wpb_column vc_column_container tdc-column td-pb-span3", "td_block_wrap tdb_single_author tdi_129 td-pb-border-top td_block_template_1 tdb-post-meta", "td_block_wrap tdb_single_tags tdi_127 td-pb-border-top td_block_template_1", "td_block_wrap tdb_single_post_share tdi_126  td-pb-border-top td_block_template_1", "tdc_zone tdi_75  wpb_row td-pb-row tdc-element-style", "tdi_74_rand_style td-element-style", "tdc_zone tdi_2  wpb_row td-pb-row tdc-element-style", "tdc_zone tdi_15  wpb_row td-pb-row tdc-element-style", "tdc_zone tdi_28  wpb_row td-pb-row", "tdc-row tdc-row-is-sticky tdc-rist-bottom stretch_row_1400 td-stretch-content", "td-a-ad id_bottom_ad", "vc_row_inner tdi_112  vc_row vc_inner wpb_row td-pb-row"}
 	} else if strings.Contains(url, "slobodnadalmacija.hr") {
 		selector = ".row.row--grid.row--content"
+		excludedClasses = []string{"se-embed se-embed--photo", "item__image", "item__tags", "item__related", "item__image-info"}
 	} else if strings.Contains(url, "telegram.hr") {
 		selector = "#article-body"
+		excludedClasses = []string{"full flex overtitle-parent relative", "nothfive full flex relative article-meta", "full relative single-article-footer flex column-top-pad", "full flex cxenseignore article-full-width", "full flex cxenseignore", "perex", "fb-post"}
+
 	}
-
-	excluded24sataHr := []string{"article_navigation", "dfp_banner dfp_banner--billboard_mid", "share_bar", "app_promo_block_container", "article_keywords_container", "article__content_container engagement_bar_wrapper", "article__thread"}
-	excludedIndexHr := []string{"js-slot-container", "tags-holder", "article-report-container", "article-call-to-action", "main-img-desc", "loading-text", "front-gallery-holder flex", "gallery-thumb-slider gallery-slider swiper", "gallery-desc-slider gallery-slider swiper"}
-	excludedSlobodnaDalmacijaHr := []string{"se-embed se-embed--photo", "item__image", "item__tags", "item__related", "item__image-info"}
-	excludedTelegramHr := []string{"full flex overtitle-parent relative", "nothfive full flex relative article-meta", "full relative single-article-footer flex column-top-pad", "full flex cxenseignore article-full-width", "full flex cxenseignore", "perex", "fb-post"}
-
-	excludedClasses := slices.Concat(excluded24sataHr, excludedIndexHr, excludedSlobodnaDalmacijaHr, excludedTelegramHr)
 
 	doc.Find(selector).Each(func(i int, s *goquery.Selection) {
 		processNode(s, &content, excludedClasses) // Process the selected element and its descendants
@@ -182,7 +191,7 @@ func (a *App) GetArticleContent(url string) (string, error) {
 }
 
 func processNode(n *goquery.Selection, content *strings.Builder, excludedClasses []string) {
-	if n.Is("script") {
+	if n.Is("script") || n.Is("style") {
 		return
 	}
 

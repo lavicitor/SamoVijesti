@@ -125,6 +125,13 @@ document.getElementById("indexHrNovac").addEventListener("click", () => {
   fetchAndDisplayRSS("https://www.index.hr/rss/vijesti-novac");
 });
 
+document.getElementById("sisakInfoButton").addEventListener("click", () => {
+  dvadeseticetirisataHrSubmenu.style.display = 'none'
+  indexHrSubmenu.style.display = 'none'
+  slobodnadalmacijaHrSubmenu.style.display = 'none'
+  fetchAndDisplayRSS("https://www.sisak.info/feed/");
+});
+
 document.getElementById("slobodnadalmacijaHrButton").addEventListener("click", () => {
   dvadeseticetirisataHrSubmenu.style.display = 'none'
   indexHrSubmenu.style.display = 'none'
