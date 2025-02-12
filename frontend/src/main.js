@@ -6,7 +6,7 @@ function fetchAndDisplayRSS(rssURL) {
   window.go.main.App.GetRSS(urlWithCacheBuster)
     .then(function (items) {
       const itemList = document.getElementById("articleList");
-      itemList.childNodes.forEach((child) => itemList.removeChild(child))
+      itemList.childNodes.forEach((child) => itemList.removeChild(child));
       itemList.innerHTML = "";
 
       if (items.length === 0) {
@@ -18,16 +18,31 @@ function fetchAndDisplayRSS(rssURL) {
       function addItem() {
         if (i < items.length) {
           const item = items[i];
-          const li = document.createElement("li");
-          window.go.main.App.GetArticleImage(item.Link).then((ImageURL) => {
-            item.ImageURL = ImageURL;
-            li.style = "border-bottom: 1px dotted grey; list-style-type: none;";
-            li.innerHTML = `<p><img src="${item.ImageURL}" width="100%"></p><h3><a href="${item.Link}" target="_blank">${item.Title}</a></h3><p>${item.Description}</p><p>Published: ${item.PubDate}</p>`;
-            itemList.appendChild(li);
-            i++;
-            requestAnimationFrame(addItem);
-          });
+          window.go.main.App.IsPremium(item.Link)
+            .then((premium) => {
+              if (!premium) {
+                const li = document.createElement("li");
+                window.go.main.App.GetArticleImage(item.Link)
+                  .then((ImageURL) => {
+                    item.ImageURL = ImageURL;
+                    li.style =
+                      "border-bottom: 1px dotted grey; list-style-type: none;";
+                    li.innerHTML = `<p><img src="${item.ImageURL}" width="100%"></p><h3><a href="${item.Link}" target="_blank">${item.Title}</a></h3><p>${item.Description}</p><p>Published: ${item.PubDate}</p>`;
+                    itemList.appendChild(li);
+                  })
+                  .catch(function (error) {
+                    console.error("Error fetching article image:", error);
+                    alert("Error fetching article image: " + error);
+                  });
+              }
+            })
+            .catch(function (error) {
+              console.error("Error fetching article:", error);
+              alert("Error fetching article: " + error);
+            });
         }
+        i++;
+        requestAnimationFrame(addItem);
       }
       addItem();
     })
@@ -37,52 +52,76 @@ function fetchAndDisplayRSS(rssURL) {
     });
 }
 
-const dvadeseticetirisataHrSubmenu = document.getElementById('dvadeseticetirisataHrSubmenu');
-const indexHrSubmenu = document.getElementById('indexHrSubmenu');
-const slobodnadalmacijaHrSubmenu = document.getElementById('slobodnadalmacijaHrSubmenu');
+const dvadeseticetirisataHrSubmenu = document.getElementById(
+  "dvadeseticetirisataHrSubmenu"
+);
+const indexHrSubmenu = document.getElementById("indexHrSubmenu");
+const slobodnadalmacijaHrSubmenu = document.getElementById(
+  "slobodnadalmacijaHrSubmenu"
+);
 
-document.getElementById("dvadeseticetirisataHrButton").addEventListener("click", () => {
-  indexHrSubmenu.style.display = 'none'
-  slobodnadalmacijaHrSubmenu.style.display = 'none'
-  dvadeseticetirisataHrSubmenu.style.display = dvadeseticetirisataHrSubmenu.style.display === 'block' ? 'none' : 'block';
-});
+document
+  .getElementById("dvadeseticetirisataHrButton")
+  .addEventListener("click", () => {
+    indexHrSubmenu.style.display = "none";
+    slobodnadalmacijaHrSubmenu.style.display = "none";
+    dvadeseticetirisataHrSubmenu.style.display =
+      dvadeseticetirisataHrSubmenu.style.display === "block" ? "none" : "block";
+  });
 
-document.getElementById("dvadeseticetirisataHrAktualno").addEventListener("click", () => {
-  fetchAndDisplayRSS("http://www.24sata.hr/feeds/aktualno.xml");
-});
+document
+  .getElementById("dvadeseticetirisataHrAktualno")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("http://www.24sata.hr/feeds/aktualno.xml");
+  });
 
-document.getElementById("dvadeseticetirisataHrNajnovije").addEventListener("click", () => {
-  fetchAndDisplayRSS("http://www.24sata.hr/feeds/najnovije.xml");
-});
+document
+  .getElementById("dvadeseticetirisataHrNajnovije")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("http://www.24sata.hr/feeds/najnovije.xml");
+  });
 
-document.getElementById("dvadeseticetirisataHrNews").addEventListener("click", () => {
-  fetchAndDisplayRSS("http://www.24sata.hr/feeds/news.xml");
-});
+document
+  .getElementById("dvadeseticetirisataHrNews")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("http://www.24sata.hr/feeds/news.xml");
+  });
 
-document.getElementById("dvadeseticetirisataHrShow").addEventListener("click", () => {
-  fetchAndDisplayRSS("http://www.24sata.hr/feeds/show.xml");
-});
+document
+  .getElementById("dvadeseticetirisataHrShow")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("http://www.24sata.hr/feeds/show.xml");
+  });
 
-document.getElementById("dvadeseticetirisataHrSport").addEventListener("click", () => {
-  fetchAndDisplayRSS("http://www.24sata.hr/feeds/sport.xml");
-});
+document
+  .getElementById("dvadeseticetirisataHrSport")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("http://www.24sata.hr/feeds/sport.xml");
+  });
 
-document.getElementById("dvadeseticetirisataHrLifestyle").addEventListener("click", () => {
-  fetchAndDisplayRSS("http://www.24sata.hr/feeds/lifestyle.xml");
-});
+document
+  .getElementById("dvadeseticetirisataHrLifestyle")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("http://www.24sata.hr/feeds/lifestyle.xml");
+  });
 
-document.getElementById("dvadeseticetirisataHrTech").addEventListener("click", () => {
-  fetchAndDisplayRSS("http://www.24sata.hr/feeds/tech.xml");
-});
+document
+  .getElementById("dvadeseticetirisataHrTech")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("http://www.24sata.hr/feeds/tech.xml");
+  });
 
-document.getElementById("dvadeseticetirisataHrViral").addEventListener("click", () => {
-  fetchAndDisplayRSS("http://www.24sata.hr/feeds/fun.xml");
-});
+document
+  .getElementById("dvadeseticetirisataHrViral")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("http://www.24sata.hr/feeds/fun.xml");
+  });
 
 document.getElementById("indexHrButton").addEventListener("click", () => {
-  dvadeseticetirisataHrSubmenu.style.display = 'none'
-  slobodnadalmacijaHrSubmenu.style.display = 'none'
-  indexHrSubmenu.style.display = indexHrSubmenu.style.display === 'block' ? 'none' : 'block';
+  dvadeseticetirisataHrSubmenu.style.display = "none";
+  slobodnadalmacijaHrSubmenu.style.display = "none";
+  indexHrSubmenu.style.display =
+    indexHrSubmenu.style.display === "block" ? "none" : "block";
 });
 
 document.getElementById("indexHrNajnovije").addEventListener("click", () => {
@@ -126,54 +165,73 @@ document.getElementById("indexHrNovac").addEventListener("click", () => {
 });
 
 document.getElementById("sisakInfoButton").addEventListener("click", () => {
-  dvadeseticetirisataHrSubmenu.style.display = 'none'
-  indexHrSubmenu.style.display = 'none'
-  slobodnadalmacijaHrSubmenu.style.display = 'none'
+  dvadeseticetirisataHrSubmenu.style.display = "none";
+  indexHrSubmenu.style.display = "none";
+  slobodnadalmacijaHrSubmenu.style.display = "none";
   fetchAndDisplayRSS("https://www.sisak.info/feed/");
 });
 
-document.getElementById("slobodnadalmacijaHrButton").addEventListener("click", () => {
-  dvadeseticetirisataHrSubmenu.style.display = 'none'
-  indexHrSubmenu.style.display = 'none'
-  slobodnadalmacijaHrSubmenu.style.display = slobodnadalmacijaHrSubmenu.style.display === 'block' ? 'none' : 'block';
-});
+document
+  .getElementById("slobodnadalmacijaHrButton")
+  .addEventListener("click", () => {
+    dvadeseticetirisataHrSubmenu.style.display = "none";
+    indexHrSubmenu.style.display = "none";
+    slobodnadalmacijaHrSubmenu.style.display =
+      slobodnadalmacijaHrSubmenu.style.display === "block" ? "none" : "block";
+  });
 
-document.getElementById("slobodnadalmacijaHrNajnovije").addEventListener("click", () => {
-  fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed");
-});
+document
+  .getElementById("slobodnadalmacijaHrNajnovije")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed");
+  });
 
-document.getElementById("slobodnadalmacijaHrVijesti").addEventListener("click", () => {
-  fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed/category/119");
-});
+document
+  .getElementById("slobodnadalmacijaHrVijesti")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed/category/119");
+  });
 
-document.getElementById("slobodnadalmacijaHrHrvatska").addEventListener("click", () => {
-  fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed/category/142");
-});
+document
+  .getElementById("slobodnadalmacijaHrHrvatska")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed/category/142");
+  });
 
-document.getElementById("slobodnadalmacijaHrSvijet").addEventListener("click", () => {
-  fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed/category/241");
-});
+document
+  .getElementById("slobodnadalmacijaHrSvijet")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed/category/241");
+  });
 
-document.getElementById("slobodnadalmacijaHrPolitika").addEventListener("click", () => {
-  fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed/category/242");
-});
+document
+  .getElementById("slobodnadalmacijaHrPolitika")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed/category/242");
+  });
 
-document.getElementById("slobodnadalmacijaHrCrnaKronika").addEventListener("click", () => {
-  fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed/category/243");
-});
+document
+  .getElementById("slobodnadalmacijaHrCrnaKronika")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed/category/243");
+  });
 
-document.getElementById("slobodnadalmacijaHrBiznis").addEventListener("click", () => {
-  fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed/category/244");
-});
+document
+  .getElementById("slobodnadalmacijaHrBiznis")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed/category/244");
+  });
 
-document.getElementById("slobodnadalmacijaHrRegija").addEventListener("click", () => {
-  fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed/category/245");
-});
+document
+  .getElementById("slobodnadalmacijaHrRegija")
+  .addEventListener("click", () => {
+    fetchAndDisplayRSS("https://slobodnadalmacija.hr/feed/category/245");
+  });
 
 document.getElementById("telegramHrButton").addEventListener("click", () => {
-  dvadeseticetirisataHrSubmenu.style.display = 'none'
-  indexHrSubmenu.style.display = 'none'
-  slobodnadalmacijaHrSubmenu.style.display = 'none'
+  dvadeseticetirisataHrSubmenu.style.display = "none";
+  indexHrSubmenu.style.display = "none";
+  slobodnadalmacijaHrSubmenu.style.display = "none";
   fetchAndDisplayRSS("https://www.telegram.hr/feed/");
 });
 

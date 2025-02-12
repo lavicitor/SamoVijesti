@@ -85,6 +85,33 @@ func (a *App) GetRSS(url string) ([]Item, error) {
 	return rss.Channel.Items, nil
 }
 
+func (a *App) IsPremium(url string) (bool, error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return false, fmt.Errorf("error fetching RSS: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(resp.Body)
+		return false, fmt.Errorf("HTTP error: %d - %s", resp.StatusCode, string(body))
+	}
+
+	doc, err := goquery.NewDocumentFromReader(resp.Body)
+	if err != nil {
+		return false, fmt.Errorf("error parsing HTML: %w", err)
+	}
+
+	if strings.Contains(url, "slobodnadalmacija.hr") {
+		if doc.Find(".itemFullText.itemFullText--premium").Nodes != nil {
+			log.Println(doc.Find(".itemFullText.itemFullText--premium").Text())
+			return true, nil
+		}
+	}
+
+	return false, nil
+}
+
 func (a *App) GetArticleImage(url string) (string, error) {
 	resp, err := http.Get(url)
 	if err != nil {

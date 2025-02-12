@@ -297,6 +297,8 @@ h1 {
   position: absolute;
   overflow-y: auto;
   max-height: 80vh;
+  left: 1%;
+  right:1%;
 }
 
 #modal-body img {

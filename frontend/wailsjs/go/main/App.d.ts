@@ -7,3 +7,5 @@ export function GetArticleContent(arg1:string):Promise<string>;
 export function GetArticleImage(arg1:string):Promise<string>;
 
 export function GetRSS(arg1:string):Promise<Array<main.Item>>;
+
+export function IsPremium(arg1:string):Promise<boolean>;

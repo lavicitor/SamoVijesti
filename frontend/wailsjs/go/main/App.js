@@ -13,3 +13,7 @@ export function GetArticleImage(arg1) {
 export function GetRSS(arg1) {
   return window['go']['main']['App']['GetRSS'](arg1);
 }
+
+export function IsPremium(arg1) {
+  return window['go']['main']['App']['IsPremium'](arg1);
+}
