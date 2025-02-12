@@ -45,17 +45,18 @@ h1 {
   padding: 10px;
   background-color: #1c1c1c;
   position: relative;
+  overflow-x: hidden;
 }
 
 #dvadeseticetirisataHrButton {
   width: 100%;
   background-color: #d12227;
   height: 50px;
-  align-items: start;
-  justify-content: center;
   display: flex;
   cursor: pointer;
   border: 0;
+  justify-content: center;
+  align-items: center;
 }
 
 #dvadeseticetirisataHrButton:hover {
@@ -71,7 +72,6 @@ h1 {
 #dvadeseticetirisataHrButton text {
   color: white;
   flex-grow: 1;
-  text-align: center;
   font-size: xx-large;
 }
 
@@ -154,8 +154,6 @@ h1 {
   width: 100%;
   background-color: #00165d;
   height: 50px;
-  align-items: start;
-  justify-content: center;
   display: flex;
   cursor: pointer;
   font-family:serif;
@@ -164,6 +162,8 @@ h1 {
   font-weight: 600;
   letter-spacing: 1px;
   border: 0;
+  align-items: center;
+  text-align: left;
 }
 
 #sisakInfoButton:hover {
@@ -173,7 +173,7 @@ h1 {
 
 #sisakInfoButton img {
   max-width: 100%;
-  height: auto;
+  max-height: auto;
 }
 
 #sisakInfoButton text {
