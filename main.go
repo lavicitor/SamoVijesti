@@ -207,7 +207,7 @@ func (a *App) GetArticleContent(url string) (string, error) {
 		excludedClasses = []string{"article_navigation", "article__info_wrap", "engagement_bar_container", "dfp_banner dfp_banner--billboard_mid", "share_bar", "app_promo_block_container", "article_keywords_container", "article__content_container engagement_bar_wrapper", "article__thread"}
 	} else if strings.Contains(url, "index.hr") {
 		selector = ".left-part"
-		excludedClasses = []string{"js-slot-container", "tags-holder", "article-report-container", "article-call-to-action", "main-img-desc", "loading-text", "front-gallery-holder flex", "gallery-thumb-slider gallery-slider swiper", "gallery-desc-slider gallery-slider swiper"}
+		excludedClasses = []string{"home-cube-big-timeline", "items-header flex", "nav main-tab main-content-bg flex sticky", "details-addition vijesti-text", "timeline-content latest", "timeline-content most-read", "tab-content-most-read", "bottom-border", "read-more-slider ", "article-read-more-container", "js-slot-container", "tags-holder", "article-report-container", "article-call-to-action", "main-img-desc", "loading-text", "front-gallery-holder flex", "gallery-thumb-slider gallery-slider swiper", "gallery-desc-slider gallery-slider swiper"}
 	} else if strings.Contains(url, "jutarnji.hr") {
 		selector = ".itemFullText"
 		excludedClasses = []string{"se-embed"}

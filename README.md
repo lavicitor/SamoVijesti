@@ -20,6 +20,6 @@ Requires go, npm and wails
 - Local caching
 - Archiving
 
-# Long term goals
+## Long term goals
 - Sync across devices (serverless)
 - Have a large library of sites users can select, as well as add their own
