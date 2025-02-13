@@ -29,7 +29,7 @@ h1 {
   position: relative;
   padding-right: 10px;
   overflow: hidden;
-  margin-bottom: 10px; /* Add some space below the button */
+  margin-bottom: 5px; /* Add some space below the button */
 }
 
 #content-area {
@@ -150,6 +150,26 @@ h1 {
   background-color: darkred;
 }
 
+#jutarnjiHrButton {
+  width: 100%;
+  background-color: #fefefe;
+  height: 50px;
+  align-items: center;
+  cursor: pointer;
+  border: 0;
+}
+
+#jutarnjiHrButton:hover {
+  background-color: #ffffff;
+  opacity: 0.8;
+}
+
+#jutarnjiHrButton img {
+  max-height: 95%;
+  max-width: auto;
+  height: auto;
+}
+
 #sisakInfoButton {
   width: 100%;
   background-color: #00165d;
@@ -248,6 +268,25 @@ h1 {
 #telegramHrButton img {
   margin-top: 5px;
   max-height: 95%;
+  max-width: auto;
+  height: auto;
+}
+
+#vecernjiHrButton {
+  width: 100%;
+  background-color: #e31d26;
+  height: 50px;
+  align-items: center;
+  cursor: pointer;
+  border: 0;
+}
+
+#vecernjiHrButton:hover {
+  opacity: 0.8;
+}
+
+#vecernjiHrButton img {
+  max-height: 100%;
   max-width: auto;
   height: auto;
 }

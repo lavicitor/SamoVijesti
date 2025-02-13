@@ -164,6 +164,13 @@ document.getElementById("indexHrNovac").addEventListener("click", () => {
   fetchAndDisplayRSS("https://www.index.hr/rss/vijesti-novac");
 });
 
+document.getElementById("jutarnjiHrButton").addEventListener("click", () => {
+  dvadeseticetirisataHrSubmenu.style.display = "none";
+  indexHrSubmenu.style.display = "none";
+  slobodnadalmacijaHrSubmenu.style.display = "none";
+  fetchAndDisplayRSS("https://www.jutarnji.hr/feed/");
+});
+
 document.getElementById("sisakInfoButton").addEventListener("click", () => {
   dvadeseticetirisataHrSubmenu.style.display = "none";
   indexHrSubmenu.style.display = "none";
@@ -233,6 +240,13 @@ document.getElementById("telegramHrButton").addEventListener("click", () => {
   indexHrSubmenu.style.display = "none";
   slobodnadalmacijaHrSubmenu.style.display = "none";
   fetchAndDisplayRSS("https://www.telegram.hr/feed/");
+});
+
+document.getElementById("vecernjiHrButton").addEventListener("click", () => {
+  dvadeseticetirisataHrSubmenu.style.display = "none";
+  indexHrSubmenu.style.display = "none";
+  slobodnadalmacijaHrSubmenu.style.display = "none";
+  fetchAndDisplayRSS("https://www.vecernji.hr/feeds/");
 });
 
 document.addEventListener("DOMContentLoaded", () => {
