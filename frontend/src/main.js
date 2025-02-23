@@ -3,6 +3,7 @@ import "./style.css";
 function fetchAndDisplayRSS(rssURL) {
   const cacheBuster = new Date().getTime();
   const urlWithCacheBuster = `${rssURL}?cb=${cacheBuster}`;
+  window.scrollTo({ top: 0, behavior: 'smooth' })
   window.go.main.App.GetRSS(urlWithCacheBuster)
     .then(function (items) {
       const itemList = document.getElementById("articleList");

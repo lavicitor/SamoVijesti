@@ -11,7 +11,7 @@ Requires go, npm and wails
 ## Short term goals
 - Basic app functionality, hardcoding is fine
 - Learning how various sites function so filtering can be automated in the future
-- Learning Go, JS and wails
+- Learning Go, JS and Wails
 
 ## Mid term goals
 - Remove hardcoding and allow for configurable RSS fetching and site filtering
