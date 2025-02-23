@@ -1,13 +1,20 @@
 import "./style.css";
 
+var fetching = false;
+var interruptFetching = false;
+
 function fetchAndDisplayRSS(rssURL) {
+  while (fetching === true) {
+    interruptFetching = true;
+  }
+  fetching = true;
+  interruptFetching = false;
   const cacheBuster = new Date().getTime();
   const urlWithCacheBuster = `${rssURL}?cb=${cacheBuster}`;
   window.scrollTo({ top: 0, behavior: 'smooth' })
   window.go.main.App.GetRSS(urlWithCacheBuster)
     .then(function (items) {
       const itemList = document.getElementById("articleList");
-      itemList.childNodes.forEach((child) => itemList.removeChild(child));
       itemList.innerHTML = "";
 
       if (items.length === 0) {
@@ -17,6 +24,10 @@ function fetchAndDisplayRSS(rssURL) {
 
       let i = 0;
       function addItem() {
+        if (interruptFetching === true) {
+          interruptFetching = false;
+          return
+        }
         if (i < items.length) {
           const item = items[i];
           window.go.main.App.IsPremium(item.Link)
@@ -51,6 +62,7 @@ function fetchAndDisplayRSS(rssURL) {
       console.error("Error fetching RSS:", error);
       alert("Error fetching RSS: " + error);
     });
+    fetching = false;
 }
 
 const dvadeseticetirisataHrSubmenu = document.getElementById(
